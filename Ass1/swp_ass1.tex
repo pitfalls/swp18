@@ -1,0 +1,136 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the  LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,runningheads,a4paper]{llncs}
+
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage[mathcal]{eucal}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{mathtools}
+
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{float}
+
+
+
+
+
+\usepackage{listings}
+\lstdefinelanguage{scala}{
+  morekeywords={abstract,case,catch,class,def,%
+    do,else,extends,false,final,finally,%
+    for,if,implicit,import,match,mixin,%
+    new,null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,%
+    type,val,var,while,with,yield},
+  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+\lstset{
+    literate={~} {$\sim$}{1}
+}
+
+
+
+\makeatletter
+\renewcommand\chapter{\thispagestyle{plain}%
+\global\@topnum\z@
+\@afterindentfalse
+\secdef\@chapter\@schapter}
+\makeatother
+\urldef{\mailsa}\path|alexander.frewein@student.tugraz.at|
+\urldef{\mailsf}\path|fabian.fruehwirth@student.tugraz.at|
+\topmargin-0.5cm
+
+
+\begin{document}
+
+
+% first the title is needed
+\title{SWP Assigmnment 1}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{SWP Assigmnment 1}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Alexander Frewein (1430019)\\
+		Klaus Fabian Frühwirt (1131522)}
+%
+\authorrunning{SWP Assigmnment 1}
+% (feature abused for this document to repeat the title also on left hand pages)
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{Institute of Software Technology\\
+\mailsa \\
+\mailsf \\
+}
+
+%
+% NB: a more complex sample for affiliations and the mapping to the
+% corresponding authors can be found in the file "llncs.dem"
+% (search for the string "\mainmatter" where a contribution starts).
+% "llncs.dem" accompanies the document class "llncs.cls".
+%
+
+
+%\begin{table}[htbp]
+ %   \centering
+   
+    
+  %    \begin{tabular}{|c|c|c|}
+%\hline
+ %&FIRST & FOLLOW \\ \hline
+%S & Test & Test \\ \hline
+
+ %       \end{tabular}
+%\end{table}
+
+
+
+\toctitle{SWP Assigmnment 1}
+\tocauthor{Authors' Instructions}
+\maketitle
+
+
+\end{document}
+
+
+
+
+
+
+
+
