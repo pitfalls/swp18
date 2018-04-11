@@ -68,6 +68,7 @@
 \makeatother
 \urldef{\mailsa}\path|alexander.frewein@student.tugraz.at|
 \urldef{\mailsf}\path|fabian.fruehwirth@student.tugraz.at|
+\urldef{\mailsp}\path|stephany.amizic@student.tugraz.at|
 \topmargin-0.5cm
 
 
@@ -86,8 +87,9 @@
 % their surnames. This ensures that the names appear correctly in
 % the running heads and the author index.
 %
-\author{Alexander Frewein (1430019)\\
-		Klaus Fabian Frühwirt (1131522)}
+\author{Alexander Frewein (01430019)\\
+		Klaus Fabian Frühwirt (01131523)\\
+		Stephany Amizic (01331786)}
 %
 \authorrunning{SWP Assigmnment 1}
 % (feature abused for this document to repeat the title also on left hand pages)
@@ -96,27 +98,9 @@
 \institute{Institute of Software Technology\\
 \mailsa \\
 \mailsf \\
+\mailsp \\
 }
 
-%
-% NB: a more complex sample for affiliations and the mapping to the
-% corresponding authors can be found in the file "llncs.dem"
-% (search for the string "\mainmatter" where a contribution starts).
-% "llncs.dem" accompanies the document class "llncs.cls".
-%
-
-
-%\begin{table}[htbp]
- %   \centering
-   
-    
-  %    \begin{tabular}{|c|c|c|}
-%\hline
- %&FIRST & FOLLOW \\ \hline
-%S & Test & Test \\ \hline
-
- %       \end{tabular}
-%\end{table}
 
 
 
@@ -125,12 +109,99 @@
 \maketitle
 
 
+\section*{Beispiel 1}
+\subsection*{a.)}
+
+\begin{align*}
+L &= \{\underline{a}(\underline{a}\underline{a}|\underline{b})^* \underline{c}\}\\
+S &\rightarrow \underline{a}A  \\
+S &\rightarrow \underline{a}B  \\
+S &\rightarrow \underline{a}C  \\
+A &\rightarrow \underline{a}E  \\
+A &\rightarrow \underline{c}D  \\
+B &\rightarrow \underline{b}B  \\
+B &\rightarrow \underline{c}D  \\
+C &\rightarrow \underline{c}D  \\
+D &\rightarrow \epsilon  \\
+E &\rightarrow \underline{a}A
+\end{align*}
+
+
+\subsection*{b.)}
+\begin{align*}
+L &= \{\underline{a}^{(2n)} \underline{b} \; \underline{c}^* \; (\underline{bb} | \underline{d}) \; | n>0 \}\\
+S &\rightarrow \underline{a}A  \\
+A &\rightarrow \underline{a}A  \\
+A &\rightarrow \underline{b}C  \\
+A &\rightarrow \underline{b}B  \\
+A &\rightarrow \underline{b}D  \\
+B &\rightarrow \underline{b}E  \\
+B &\rightarrow \epsilon  \\
+C &\rightarrow \underline{c}C  \\
+C &\rightarrow \underline{c}B  \\
+C &\rightarrow \underline{c}D  \\
+D &\rightarrow \underline{d}D  \\
+D &\rightarrow \epsilon  \\
+E &\rightarrow \underline{b}B
+\end{align*}
+
+\section*{Beispiel 2}
+\subsection*{a.)}
+Dies ist eine \textbf{allgemeine} Grammatik da $ \mid\alpha\mid \leq \mid\beta\mid$ \textbf{nicht} gilt und somit keine Restriktion $\alpha \rightarrow \beta$  gilt 
+\subsection*{b.)}
+Dies ist eine \textbf{reguläre} Grammatik da $ \mid\alpha\mid \leq \mid\beta\mid , \alpha \in$ V\textsubscript{N} 
+$\beta$ hat form aA oder a, mit \\a $\in$ V\textsubscript{T} $\bigcup$ \{$\epsilon$\}, A $\in$ V\textsubscript{N}
+\subsection*{c.)}
+Dies ist eine \textbf{kontextfreie} Grammatik da  $\mid\alpha\mid \leq \mid\beta\mid\, , \alpha \in$ V\textsubscript{N}
+\subsection*{d.)}
+Dies ist keine \textbf{gültige} Grammatik da $R \rightarrow Q\underline{y} $ nicht laut Definition $\alpha \, \beta \in (V\textsubscript{N} \cup V\textsubscript{T})$ diese Form nicht in der Grammatik definiert ist.
+\subsection*{e.)}
+Dies ist eine \textbf{allgemeine} Grammatik da $ \mid\alpha\mid \leq \mid\beta\mid$ \textbf{nicht} gilt und somit keine Restriktion $\alpha \rightarrow \beta$  gilt 
+\subsection*{f.)}
+Dies ist keine \textbf{gültige} Grammatik da $\underline{num} \rightarrow      \underline{var}$ nicht in den Grammatik definiert ist
+
+
+
+\section*{Beispiel 3}
+\subsection*{First und Follow Mengen:}
+
+\begin{table}[htbp]
+    \centering
+      \begin{tabular}{|m{1cm}|m{2cm}|m{2cm}|}
+\hline
+ &FIRST & FOLLOW \\ \hline
+S & \underline{a} \underline{b} \underline{c} \underline{d} \underline{e} & \$ \\ \hline
+A & \underline{a}  \underline{b} \underline{c} &  \underline{d} \underline{e} \\ \hline
+B & \underline{d} \underline{e} & \underline{c} \underline{d} \underline{e}\\ \hline
+C & \underline{b}  & \underline{c} \underline{d} \underline{e} \\ \hline
+D & \underline{c} & \underline{d} \underline{e} \\ \hline
+E & \underline{d} \underline{e} & \underline{c} \underline{d} \underline{e}\\ 
+\hline
+        \end{tabular}
+\end{table}
+
+\newpage
+\subsection*{LL(1) Tabelle}
+
+\begin{table}[htbp]
+    \centering
+      \begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+   & \underline{a} & \underline{b} & \underline{c} & \underline{d} & \underline{e} & \$ \\ \hline
+S & S $\rightarrow$ AB & S $\rightarrow$ AB & S $\rightarrow$ AB&  S $\rightarrow$ AB  &  S $\rightarrow$ AB &  S $\rightarrow$ AB \\ \hline
+A & A $\rightarrow$ \underline{a}A & A $\rightarrow$ CD & A $\rightarrow$ CD &   &  &  \\ \hline
+B &  &   &   & B $\rightarrow$ E &B $\rightarrow$ E  &   \\ \hline
+C  &  & C $\rightarrow$ \underline{b} B & C $\rightarrow \epsilon$ &C $\rightarrow \epsilon$   & C $\rightarrow \epsilon$ & \\ \hline
+D &  &   &D $\rightarrow$ \underline{c}C   &D $\rightarrow \epsilon$   &D $\rightarrow \epsilon$  &   \\ \hline
+E &  &   & &E $\rightarrow$ \underline{d}   &E $\rightarrow$ \underline{e}  &   \\
+\hline
+        \end{tabular}
+\end{table}
+
+
+
+
+
+
 \end{document}
-
-
-
-
-
-
-
 
