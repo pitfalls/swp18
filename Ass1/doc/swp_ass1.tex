@@ -314,7 +314,53 @@ Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet u
 Diese Satz ist Valid!
 \\
 
+\newpage
+\section*{Beispiel 5}
+Die gegebene Gramatik ist keine LL(1) Gramatik weil:
+\begin{itemize}
+\item X ist Mehrdeutig (Linksfaktorisierung)
+\item Y ist indirekt Links recrusiv (über Z)
+\end{itemize}
 
+
+\subsection*{\"Aquivalente LL(1) Grammatik:}
+\begin{align*}
+S &\rightarrow X Y \\
+V &\rightarrow \underline{x} \\
+V &\rightarrow \underline{-} \\
+W &\rightarrow \underline{0} W \\
+W &\rightarrow \underline{1} W \\
+W &\rightarrow \underline{\epsilon} \\
+X &\rightarrow \underline{x} X_2 \\
+X_2 &\rightarrow V \\
+X_2 &\rightarrow W \\
+Y &\rightarrow \underline{+} Y_2 \\
+Y_2 &\rightarrow \underline{y} W Y_2 \\
+Y_2 &\rightarrow \underline{\epsilon} \\
+\end{align*}
+
+\subsection*{LL(1) Tabelle}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+ & \underline{x} & \underline{-} & \underline{0} & \underline{1} & \underline{+} & \underline{y} & \$ \\ 
+\hline 
+$S$ & $S \rightarrow X Y $&   &   &   &   &   &   \\ 
+\hline 
+$V$ & $V \rightarrow X$ & $V \rightarrow \underline{-} $&   &   &   &   &   \\ 
+\hline 
+$W$ &   &   & $W \rightarrow \underline{0} W $& W $\rightarrow \underline{1} W $&$ W \rightarrow \epsilon$ & W $\rightarrow \epsilon$ & $W \rightarrow\epsilon$ \\ 
+\hline 
+$X$ & $X \rightarrow \underline{x} X_2 $&   &   &   &   &   &   \\ 
+\hline 
+$X_2$ & $X_2 \rightarrow V $& $X_2 \rightarrow V$ & $X2 \rightarrow W $& $X2 \rightarrow W $& $X2 \rightarrow W $&  &  \\ 
+\hline 
+$Y$ &   &   &   &   & $Y \rightarrow \underline{+} Y_2 $&   &   \\ 
+\hline 
+$Y_2$ &   &   &   &   &   & $Y2 \rightarrow \underline{y} W Y_2 $& $Y_2 \rightarrow \epsilon$ \\
+\hline 
+\end{tabular} 
+
+\newpage
 \section*{Beispiel 6}
 \subsection*{a.)}
 \begin{lstlisting}[language=scala]
