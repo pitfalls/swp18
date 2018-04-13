@@ -220,18 +220,18 @@ Gegeben ist die folgende LL(1) Tabelle, welche eine grobe Abstraktion der Variab
   \hline
  U & & & & & & &\underline{0}V &\underline{1}V & & &\\
   \hline
- V & & & & & & &\underline{0}V &\underline{1}V &\varepsilon & &\varepsilon\\
+V & & & & & & &\underline{0}V &\underline{1}V &$\varepsilon$ & &$\varepsilon$\\
    \hline
  \end{tabular}\\
  \end{center}
- \\
- \\
+ %\\
+% \\
  \"Uberpr\"ufen Sie mittels der gegebenen LL(1) Tabelle ob folgende Ausdr\"ucke g\"ultige S\"atze der definierten
-Grammatik sind:\\
-\\
+Grammatik sind:%\\
+%\\
 a)\underline{var} \underline{one} \underline{:} \underline{String} \underline{=} \underline{1}\\
 b)\underline{val} \underline{two} \underline{:} \underline{int} \underline{=} \underline{10}\\
-\\
+%\\
 Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet und abgegeben werden:\\
 \begin{center}
 \begin{tabular}{ |c|c|c|  }
@@ -242,11 +242,11 @@ Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet u
   \hline
  \end{tabular}\\
  \end{center}
- \\
+% \\
 
 \subsection*{a.)}
-\\
-\\
+%\\
+%\\
 \begin{tabular}{  |c|c|c|  }
  \hline
  Stack&Input &Produktion/Kommentar\\ 
@@ -275,7 +275,7 @@ Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet u
  Diese Satz ist nicht Valid!
  \\
  \subsection*{b.)}
- \\
+ %\\
 \begin{tabular}{ |c|c|c|  }
 
  \hline
@@ -305,7 +305,7 @@ Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet u
    \hline
  \$V\st{0}  &\st{0}\$ & \\
    \hline
- \$V  &\$  &V:= \epsilon\\
+ \$V  &\$  &V:= $\epsilon$\\
    \hline
  \$ &\$ &Valid \\
  \hline
