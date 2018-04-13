@@ -31,7 +31,7 @@
 \usepackage{array}
 \usepackage{amsmath}
 \usepackage{float}
-
+\usepackage{soul}
 
 
 
@@ -198,6 +198,121 @@ E &  &   & &E $\rightarrow$ \underline{d}   &E $\rightarrow$ \underline{e}  &   
 \hline
         \end{tabular}
 \end{table}
+
+\section*{Beispiel 4}
+
+Gegeben ist die folgende LL(1) Tabelle, welche eine grobe Abstraktion der Variablendeklaration in Scala beschreibt. Die unterstrichenen Zeichenketten in den Spalten der ersten Zeile stellen jeweils ein Terminalsymbol dar.\\
+\\
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c|c|c|c|c|c| }
+ \hline
+ &\underline{var} &\underline{val} &\underline{one} &\underline{two} &\underline{String} &\underline{Int} &\underline{0} &\underline{1} &\underline{$"$} &\underline{=} &\$\\ 
+ \hline
+ S &AB &AB & & & & & & & & & \\ 
+  \hline
+ A &CN\underline{$:$} &CN\underline{$:$} & & & & & & & & & \\
+  \hline
+ B & & & & &\underline{String}\underline{=}\underline{$"$}\underline{$V$}\underline{$"$} &\underline{Int}\underline{=}\underline{U} & & & & & \\
+  \hline
+ C &\underline{var} &\underline{val} & & & & & & & & & \\
+  \hline
+ N & & &\underline{one} &\underline{two} & & & & & & &  \\
+  \hline
+ U & & & & & & &\underline{0}V &\underline{1}V & & &\\
+  \hline
+ V & & & & & & &\underline{0}V &\underline{1}V &\varepsilon & &\varepsilon\\
+   \hline
+ \end{tabular}\\
+ \end{center}
+ \\
+ \\
+ \"Uberpr\"ufen Sie mittels der gegebenen LL(1) Tabelle ob folgende Ausdr\"ucke g\"ultige S\"atze der definierten
+Grammatik sind:\\
+\\
+a)\underline{var} \underline{one} \underline{:} \underline{String} \underline{=} \underline{1}\\
+b)\underline{val} \underline{two} \underline{:} \underline{int} \underline{=} \underline{10}\\
+\\
+Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet und abgegeben werden:\\
+\begin{center}
+\begin{tabular}{ |c|c|c|  }
+ \hline
+ Stack&Input &Produktion/Kommentar\\ 
+ \hline
+ \$S &val one: Int= "11"\$ &... \\
+  \hline
+ \end{tabular}\\
+ \end{center}
+ \\
+
+\subsection*{a.)}
+\\
+\\
+\begin{tabular}{  |c|c|c|  }
+ \hline
+ Stack&Input &Produktion/Kommentar\\ 
+ \hline
+ \$S &var one : String = 1 \$ &S:= AB \\
+  \hline
+ \$BA &var one : String = 1\$ &A:= CN\underline{:}\\
+ \hline
+ \$B\underline{:}NC &var one : String = 1 \$ &C:= \underline{var}\\
+ \hline
+ \$B\underline{:}N\st{var} &\st{var} one : String = 1\$ &\\
+   \hline
+ \$B\underline{:}N &one : String= 1\$ &N:= \underline{one} \\
+   \hline
+ \$B\st{:}\st{one} &\st{one}\st{:} String= 1\$ & \\
+   \hline
+ \$B & String = 1\$ & B:= \underline{String}\underline{=}\underline{"}V\underline{"} \\
+   \hline
+ \$"V"\st{=}\st{String} &\st{String}\st{=}1\$ & \\
+   \hline
+ \$"V" &1\$ & Keine Regel \\
+   \hline
+ 
+ \end{tabular}\\
+ \\
+ Diese Satz ist nicht Valid!
+ \\
+ \subsection*{b.)}
+ \\
+\begin{tabular}{ |c|c|c|  }
+
+ \hline
+ Stack&Input &Produktion/Kommentar\\ 
+ \hline
+ \$S &val two : int = 10\$ &S:= AB \\
+  \hline
+ \$BA &val two : int= 10\$ &A:= CN\underline{:}\\
+ \hline
+ \$B\underline{:}NC &val two : int= 10\$ &C:= \st{val}\\
+ \hline
+ \$B\underline{:}N\st{val} &\st{val} two : int = 10\$ &\\
+   \hline
+ \$B\underline{:}N &two : int = 10\$ &N:=\underline{two} \\
+   \hline
+ \$B\st{:}\st{two} &\st{two}\st{:} int = 10\$ & \\
+   \hline
+ \$B &int= 10\$ & B:= \underline{int}\underline{=}U \\
+   \hline
+ \$U\st{=}\st{int} &\st{int}\st{=} 10\$ & \\
+   \hline
+ \$U  &10\$ & U:=\underline{1}V \\
+   \hline
+ \$V\st{1} &\st{1}0\$ &\\
+   \hline
+ \$V &0\$ &V:= \underline{0}V\\
+   \hline
+ \$V\st{0}  &\st{0}\$ & \\
+   \hline
+ \$V  &\$  &V:= \epsilon\\
+   \hline
+ \$ &\$ &Valid \\
+ \hline
+
+ \end{tabular}\\
+Diese Satz ist Valid!
+\\
 
 
 \section*{Beispiel 6}
