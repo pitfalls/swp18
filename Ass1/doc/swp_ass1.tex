@@ -285,7 +285,7 @@ Die L\"osung f\"ur die Unterpunkte a und b soll im folgenden Format erarbeitet u
   \hline
  \$BA &val two : int= 10\$ &A:= CN\underline{:}\\
  \hline
- \$B\underline{:}NC &val two : int= 10\$ &C:= \underline{val}\\
+ \$B\underline{:}NC &val two : int= 10\$ &C:= \st{val}\\
  \hline
  \$B\underline{:}N\st{val} &\st{val} two : int = 10\$ &\\
    \hline
@@ -335,7 +335,7 @@ X &\rightarrow \underline{x} X_2 \\
 X_2 &\rightarrow V \\
 X_2 &\rightarrow W \\
 Y &\rightarrow \underline{+} Y_2 \\
-Y_2 &\rightarrow \underline{y} W Y_2 \\
+Y_2 &\rightarrow \underline{y} W \underline{-} Y_2 \\
 Y_2 &\rightarrow \underline{\epsilon} \\
 \end{align*}
 
@@ -352,11 +352,11 @@ $W$ &   &   & $W \rightarrow \underline{0} W $& W $\rightarrow \underline{1} W $
 \hline 
 $X$ & $X \rightarrow \underline{x} X_2 $&   &   &   &   &   &   \\ 
 \hline 
-$X_2$ & $X_2 \rightarrow V $& $X_2 \rightarrow V$ & $X2 \rightarrow W $& $X2 \rightarrow W $& $X2 \rightarrow W $&  &  \\ 
+$X_2$ & $X_2 \rightarrow V $& $X_2 \rightarrow V$ & $X_2 \rightarrow W $& $X2 \rightarrow W $& $X_2 \rightarrow W $&  &  \\ 
 \hline 
 $Y$ &   &   &   &   & $Y \rightarrow \underline{+} Y_2 $&   &   \\ 
 \hline 
-$Y_2$ &   &   &   &   &   & $Y2 \rightarrow \underline{y} W Y_2 $& $Y_2 \rightarrow \epsilon$ \\
+$Y_2$ &   &   &   &   &   & $Y_2 \rightarrow \underline{y} W \underline{-} Y_2 $& $Y_2 \rightarrow \epsilon$ \\
 \hline 
 \end{tabular} 
 
@@ -373,7 +373,10 @@ object SimpleParserA extends JavaTokenParsers {
   def apply(s: String) = parseAll(S, s)
 }
 \end{lstlisting}
-\subsection*{a.)}
+
+\bigskip
+\bigskip
+\subsection*{b.)}
 \begin{lstlisting}[language=scala]
 object SimpleParserB extends JavaTokenParsers {
   def N: Parser[Double] = "[1-9][0-9]*|0|-[1-9][0-9]*".r 
