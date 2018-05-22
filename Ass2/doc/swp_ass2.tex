@@ -36,6 +36,7 @@
 
 
 
+
 \usepackage{listings}
 \lstdefinelanguage{scala}{
   morekeywords={abstract,case,catch,class,def,%
@@ -119,25 +120,52 @@
 def div(a: Int, b:Int): Int = a / b
 def mod(a: Int, b:Int): Int = a % b
 \end{lstlisting}
+
+\section*{Beispiel 3}
+\subsection*{a}
+Gehen wir mal davon aus dass \textsf{x1 = [ [ [] ] ]}  \\
+das wäre eine Verschachtelungstiefe von 3\\
+Wir würden dann der\textsf{max(build(depth(first(x1)), nil), depth(rest(x1))) das x1 mit einer Verschachtelungstiefe von 4 übergeben, welches mit der funktion build erzeugt wird und x2 mit einer Tiefe von 3 welche durch 
+Dann rufen wir depth(x1) auf.\\
+Das würde bedeuten dass bei depth:\\
+\textsf{if atom?(first(x1)) = F}\\ 
+\textsf{else if eq?(x1, nil) = F} und es wird im else Zweig:\\
+} ausgeführt\\
+\textsf{depth(first(x1))} wird in unserem Fall dann durch textsf{ else if eq?(x1, nil) = T} zu \textsf{nil}.\\
+$\rightarrow$  \textsf{max(build(nil, nil), depth(rest(x1)))},  \textsf{depth(rest(x1))} wird ebenfalls zu \textsf{nil}, jedoch mit einer Verschachtelungstiefe von 1. Das \textsf{build(nil, nil)} baut eine Liste mit einer Verschachtelungstiefe von 2.\\
+Dann wird Funktion max aufgerufen:\\
+\textsf{if eq?(x1, nil) = T}\\
+Das bedeutet es wird die Verschachtelungstiefe von x2 returned wird. X2 hat jedoch eine Verschachtelungstiefe von 1 und x1 jedoch von 2, was bedeutet dass in diesem Fall die Funktion max den falschen Wert zurückgibt.
+\newpage
+
+\subsection*{b}
+$\omega(\underline{x1}) = [[a]]$\\
+$I(\delta, \omega, \underline{depth(x1)}) \\
+=I(\delta, \omega, \underline{if \, atom?(first(x1)) \, then \, depth(rest(x))}\\
+\underline{else \, if \, eq?(x1,nil) \, then \, nil} \\
+\underline{else \, max(build(depth(first(x)),\,nil),\, depth(rest(x)))})\\
+\\
+NR: I(\delta, \omega, \underline{atom?(first(x1))}) = atom?(I(\delta, \omega, \underline{first(x1))}) = atom?(first(I(\delta, \omega, \underline{x1}))) \\ 
+= atom?(first([])) = atom?([]) = F \\
+\\
+=I(\delta, \omega, \underline{if \, eq?(x1, nil)\, then \, nil}) \\
+\\
+NR:I(\delta, \omega, \underline{if \, eq?(x1, nil) then \, nil}) = if \, eq?(I(\delta, \omega \underline{x1}, nil)) = if \, eq?([[a]], nil) = F\\
+\\
+$
+
+
 \section*{Beispiel 4}
 \begin{lstlisting}[language=scala]
-    def count(needle:Int, haystack: List[Int]) : Int = {
-       var sum = 0
-       if(haystack == Nil)
-       {
-         println("Empty List");   
-         return 0; 
-       }
-       for(i <- haystack)
-       {
-         if(i == needle)
-         {
-           sum +=1
-         }
-       }
-       return sum
-   }  
+    def count(needle:Int, haystack: List[Int]) : Int = haystack match{
+          case Nil => 0
+          case x::xs if(x == needle) => 1 + countName(x, xs)
+          case x::xs if(x != needle) => 0
+ 
 \end{lstlisting}
+
+\subsection*{Hypothese:}
+count(append(as, bs), e) == count(as, e) + count(bs, e)
 \subsection*{Induktions Basis:   as = Nil}
 count(append(as, bs), e) == count(as, e) + count(bs, e)\\
 count(append(nil, bs), e) == count(nil, e) + count(bs, e)\\
@@ -148,7 +176,8 @@ count(bs,e) == count(bs,e)
 \subsection*{Induktions Schritt:   as = a::as}
 count(append(a::as, bs), e) == count(a::as, e) + count(bs, e)\\
 count(a::append(as, bs), e) == count(a::as, e) + count(bs, e)\\
-count(a::as, e) + count(bs, e) == count(a::as, e) + count(bs, e) $\rightarrow$ q.e.d.
+count(a::as, e) + count(bs, e) == count(a::as, e) + count(bs, e)\\ 
+count(a, e) + count(as, e) + count(bs, e) == count(a, e) + count(as, e) + count(bs,e) $\rightarrow$ q.e.d.
 
 \end{document}
 
