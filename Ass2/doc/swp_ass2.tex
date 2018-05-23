@@ -124,38 +124,47 @@ mod(a: Int, b:Int): Int = if eq?(minus(a,(mul(div(a,b),b))))
 \subsection*{Lösung}
 \\
 Hypothese:\\
-$\forall \omega \in ENV: I(\delta, \omega, \underline{div(a,b)} = \omega(a)/\omega(b) $
-\\
-\\
-$\forall \omega \in ENV: I(\delta, \omega, \underline{mod(a,b)} = \omega(a) \%  \omega(b) $
+$\forall \omega \in ENV: I(\delta, \omega, \underline{div(a,b))} = \omega(\underline{a})/\omega(\underline{b}) $
 \\
 \\
 Induktions Basis:\\
 $\omega(\underline{a}) = 0$\\
-$\omega(\underline{b}) = 1$\\
-$I(\delta, \omega, \underline{div(a,b)}) = \omega(a)/\omega(b)$\\
+$\omega(\underline{b}) = 0$\\
+$I(\delta, \omega, \underline{div(a,b)}) = I(\delta,\omega, if eq?(b,0) then$ nil else $ div(divide(a,b), build(mod(a,b))$\\
 \\
-$I(\delta, \omega, \underline{div(a,b)}) with  \\ \omega'(a) = (I(\delta, \omega, \underline{(a)})) = 0  \\ 
-\omega'(b) = (I(\delta, \omega, \underline{(b)})) = 1 \\
-= I(\delta, \omega', \underline{div(a,b)}) = div(I(\delta, \omega, 0), I(\delta, \omega, 1)) = div(0,1) = 0 == T$
-\\
-\\
-$\omega(\underline{a}) = 0$\\
-$\omega(\underline{b}) = 1$\\
-$I(\delta, \omega, \underline{mod(a,b)}) = \omega(a) \% \omega(b)$\\
-\\
-$I(\delta, \omega, \underline{mod(a,b)}) with  \\ \omega'(a) = (I(\delta, \omega, \underline{(a)})) = 0  \\ 
-\omega'(b) = (I(\delta, \omega, \underline{(b)})) = 1 \\
-= I(\delta, \omega', \underline{mod(a,b)}) = mod(I(\delta, \omega, 0), I(\delta, \omega, 1)) = mod(0,1) = 0 == T$
-\\
+NR: \\
+$I(\delta, \omega, \underline{eq?(b,0)}) = eq?(I(\delta, \omega, \underline{b}), I(\delta, \omega, 0) \\
+= eq?(\omega(\underline{b}),0)  \\
+= eq?(0,0) \\
+=T \\ $
 \\
 Induktions Schritt:\\
-$\omega(a) = n+1$ \\
-$ I(\delta, \omega', \underline{div(a,b)}) = div(I(\delta, \omega, 0), I(\delta, \omega, 1)) = div(\omega(0),\omega(1)) = div(n+1,1) = div(1,1) = 1 == T$
+$\omega(a) = n+1 $ \\
+$\omega(b) = n+1 $ \\
+$I(\delta, \omega, \underline{div(a,b)}) = I(\delta,\omega, if     eq?(b,0) then$ nil else $div(divide(a,b), build(mod(a,b))\\$
 \\
+NR:\\
+$I(\delta, \omega, \underline{eq?(b,0)}) = eq?(I(\delta, \omega, \underline{b}), I(\delta, \omega, 0) \\
+= eq?(\omega(\underline{b}),0)  \\
+= eq?(n+1,0) \\
+=F \\
 \\
-$\omega(a) = n+1$ \\
-$ I(\delta, \omega', \underline{mod(a,b)}) = mod(I(\delta, \omega, 0), I(\delta, \omega, 1)) = mod(\omega(0),\omega(1)) = mod(n+1,1) = mod(1,1) = 0 == T$
+= I(\delta, \omega', \underline{div(divide(a,b),build(mod(a,b))}))$\\
+\\
+NE:\\
+$(\omega''(a),\omega''(b)) = I(\delta, \omega', divide(a,b)) = divide(I(\delta, \omega', a), I(\delta, \omega', b)) \\
+= div(\omega'(a), \omega'(b))\\
+= div(n+1, n+1)\\
+= \frac{n+1}{n+1} = 1 \\
+\\
+=I(\delta, \omega'', build(mod(a,b))$\\
+\\
+NE:\\
+$(\omega'''(\underline{a}),\omega'''(\underline{b})) = I(\delta, \omega'', build(mod(a,b)) \\
+= build(I(\delta, \omega'', mod(a)), I(\delta, \omega'', mod(b)))\\
+= build(\omega''(a), \omega''(b))\\
+= build (n+1, n+1)\\
+= 0$\\
 
 \section*{Beispiel 3}
 \subsection*{a}
