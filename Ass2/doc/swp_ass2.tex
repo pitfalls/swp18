@@ -122,11 +122,11 @@ def mod(a: Int, b:Int): Int = a % b
 \end{lstlisting}
 \subsection*{Lösung}
 \\
-$\omega(\underline{a}) = 0$\\
-$\omega(\underline{b}) = 1$\\
-$I(\delta, \omega, \underline{div(a,b)}) \\
 Hypothese:\\
 $\forall \omega \in ENV: I(\delta, \omega, \underline{div(a,b)} = \omega(a)/\omega(b) $
+\\
+\\
+$\forall \omega \in ENV: I(\delta, \omega, \underline{mod(a,b)} = \omega(a) \%  \omega(b) $
 \\
 \\
 Induktions Basis:\\
@@ -139,9 +139,23 @@ $I(\delta, \omega, \underline{div(a,b)}) with  \\ \omega'(a) = (I(\delta, \omega
 = I(\delta, \omega', \underline{div(a,b)}) = div(I(\delta, \omega, 0), I(\delta, \omega, 1)) = div(0,1) = 0 == T$
 \\
 \\
+$\omega(\underline{a}) = 0$\\
+$\omega(\underline{b}) = 1$\\
+$I(\delta, \omega, \underline{mod(a,b)}) = \omega(a) \% \omega(b)$\\
+\\
+$I(\delta, \omega, \underline{mod(a,b)}) with  \\ \omega'(a) = (I(\delta, \omega, \underline{(a)})) = 0  \\ 
+\omega'(b) = (I(\delta, \omega, \underline{(b)})) = 1 \\
+= I(\delta, \omega', \underline{mod(a,b)}) = mod(I(\delta, \omega, 0), I(\delta, \omega, 1)) = mod(0,1) = 0 == T$
+\\
+\\
 Induktions Schritt:\\
 $\omega(a) = n+1$ \\
 $ I(\delta, \omega', \underline{div(a,b)}) = div(I(\delta, \omega, 0), I(\delta, \omega, 1)) = div(\omega(0),\omega(1)) = div(n+1,1) = div(1,1) = 1 == T$
+\\
+\\
+$\omega(a) = n+1$ \\
+$ I(\delta, \omega', \underline{mod(a,b)}) = mod(I(\delta, \omega, 0), I(\delta, \omega, 1)) = mod(\omega(0),\omega(1)) = mod(n+1,1) = mod(1,1) = 0 == T$
+
 \section*{Beispiel 3}
 \subsection*{a}
 Gehen wir mal davon aus dass \textsf{x1 = [ [ [] ] ]}  \\
