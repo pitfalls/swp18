@@ -120,6 +120,15 @@
 def div(a: Int, b:Int): Int = a / b
 def mod(a: Int, b:Int): Int = a % b
 \end{lstlisting}
+\subsection*{Lösung}
+\\
+$\omega(\underline{a}) = 0$\\
+$\omega(\underline{b}) = 1$\\
+$I(\delta, \omega, \underline{div(a,b)}) \\
+\\
+NR: I(\delta, \omega, \underline{div(a,b)}) with  \\ \omega'(a) = (I(\delta, \omega, \underline{(a)})) = 0  \\ 
+\omega'(b) = (I(\delta, \omega, \underline{(b)})) = 1 \\
+= I(\delta, \omega', \underline{div(a,b)}) = div(I(\delta, \omega, 0), I(\delta, \omega, 1)) = div(0,1) = 0 == T$
 
 \section*{Beispiel 3}
 \subsection*{a}
