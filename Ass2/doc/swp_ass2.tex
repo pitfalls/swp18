@@ -122,7 +122,6 @@ div(a: Int, b:Int): Int = if eq? (b,0) then nil
 mod(a: Int, b:Int): Int = if eq?(minus(a,(mul(div(a,b),b))))
 \end{lstlisting}
 \subsection*{Lösung}
-\\
 Hypothese:\\
 $\forall \omega \in ENV: I(\delta, \omega, \underline{div(a,b))} = \omega(\underline{a})/\omega(\underline{b}) $
 \\
@@ -168,35 +167,47 @@ $(\omega'''(\underline{a}),\omega'''(\underline{b})) = I(\delta, \omega'', build
 
 \section*{Beispiel 3}
 \subsection*{a}
-Gehen wir mal davon aus dass \textsf{x1 = [ [ [] ] ]}  \\
-das wäre eine Verschachtelungstiefe von 3\\
-Wir würden dann der\textsf{max(build(depth(first(x1)), nil), depth(rest(x1))) das x1 mit einer Verschachtelungstiefe von 4 übergeben, welches mit der funktion build erzeugt wird und x2 mit einer Tiefe von 3 welche durch 
-Dann rufen wir depth(x1) auf.\\
-Das würde bedeuten dass bei depth:\\
-\textsf{if atom?(first(x1)) = F}\\ 
-\textsf{else if eq?(x1, nil) = F} und es wird im else Zweig:\\
-} ausgeführt\\
-\textsf{depth(first(x1))} wird in unserem Fall dann durch textsf{ else if eq?(x1, nil) = T} zu \textsf{nil}.\\
-$\rightarrow$  \textsf{max(build(nil, nil), depth(rest(x1)))},  \textsf{depth(rest(x1))} wird ebenfalls zu \textsf{nil}, jedoch mit einer Verschachtelungstiefe von 1. Das \textsf{build(nil, nil)} baut eine Liste mit einer Verschachtelungstiefe von 2.\\
-Dann wird Funktion max aufgerufen:\\
-\textsf{if eq?(x1, nil) = T}\\
-Das bedeutet es wird die Verschachtelungstiefe von x2 returned wird. X2 hat jedoch eine Verschachtelungstiefe von 1 und x1 jedoch von 2, was bedeutet dass in diesem Fall die Funktion max den falschen Wert zurückgibt.
+Gehen wir mal davon aus dass \textsf{x1 = [ [[[]]]  [[]] ]}  \\
+das wäre für first(x1) eine Tiefe von 3, und das 2.te Element eine Tiefe von 2\\
+Wir kommen in depth in den Else Zweig und durch die Rekursion in depth wir das first(x1) durch die Funktion build zu eine Verschachtelungstiefe von 4. d.h. first(x1) = [[[[]]]].
+rest(x1) = [[]], diese wird mittels rekursion in depth kommt sie wieder in den Else Zweig und es entsteht nach der Rekursion von depth(first(x1)) = [[[]]] und der rest(x1') = nil d.h Max([[[]]], []) = [[[]]].\\
+Was bedeutet dass unser depth(rest(x1)) = [[[]]].\\
+Wir rufen nun Max auf = max([[[[]]]], [[[]]]).\\
+Max Funktion:\\
+In der Max Funktion gibt es x1 und x2.\\
+x1 wäre in unserem Fall x1=[ [[[[]]]] ]\\
+x2 wäre in unserem Fall x2 = [ [[[]]] ]\\
+first(x1) = [[[[]]]] , rest(x1) = nil\\
+first(x2) = [[[]]], rest(x2) = nil\\
+Im ersten durchgang werden beide if's überpsrungen, da sie ja nicht nil sind und wir kommen in den else zweig welche rekursiv max(rest(x1), rest(x2)) aufruft in einem build befehl, den lassen wir mal außer Acht.\\
+Jedoch sind Rest(x1) = x1' und rest(x2) = x2',
+Wir wissen dass beide listen nur ein Element haben.\\
+Das bedeutet if eq?(x1, nil) = T und x2' wird returned, x2' ist nil und wird mit mit nil gebuilded, somit wird von max die Verschachtelungstiefe 2 returned.
 \newpage
 
 \subsection*{b}
-$\omega(\underline{x1}) = [[a]]$\\
+$\omega(\underline{x}) = [ [[[]]]  [[]] ]$\\
 $I(\delta, \omega, \underline{depth(x1)}) \\
 =I(\delta, \omega, \underline{if \, atom?(first(x1)) \, then \, depth(rest(x))}\\
 \underline{else \, if \, eq?(x1,nil) \, then \, nil} \\
 \underline{else \, max(build(depth(first(x)),\,nil),\, depth(rest(x)))})\\
 \\
 NR: I(\delta, \omega, \underline{atom?(first(x1))}) = atom?(I(\delta, \omega, \underline{first(x1))}) = atom?(first(I(\delta, \omega, \underline{x1}))) \\ 
-= atom?(first([])) = atom?([]) = F \\
+= atom?(first([[[]]])) = atom?([]) = F \\
 \\
 =I(\delta, \omega, \underline{if \, eq?(x1, nil)\, then \, nil}) \\
 \\
-NR:I(\delta, \omega, \underline{if \, eq?(x1, nil) then \, nil}) = if \, eq?(I(\delta, \omega \underline{x1}, nil)) = if \, eq?([[a]], nil) = F\\
+NR:I(\delta, \omega, \underline{if \, eq?(x1, nil) then \, nil}) = if \, eq?(I(\delta, \omega \underline{x1}, nil)) = if \, eq?([[[]]]  [[]], nil) = F\\
 \\
+I(\delta, \omega, \underline{else \, max(build(depth(first(x)),\,nil),\, depth(rest(x)))}\\
+\\
+NR: max(build(depth(first(I(\delta, \omega \underline{x})) = max(build(depth(first(I(\delta, \omega \underline{[ [[[]]] ]}))\\
+=max(build(depth(first(I(\delta, \omega' \underline{x1'})) = max(build(depth(first(I(\delta, \omega' \underline{[ [[]] ]})) \\
+=max(build(depth(first(I(\delta, \omega'' \underline{x1''})) = max(build(depth(first(I(\delta, \omega' \underline{[ [] ]})) \\
+= else \, if \, eq?(I(\delta, \omega''' \underline{x1'''},nil) = else \, if \, eq?(nil ,nil) = T \\
+= max(build(I(\delta,  \omega, \underline{x}, nil)) =  max(build([ [[[]]] ], nil)) = max([ [[[[]]]] ], depth(rest(x)))\\
+\\
+NR:
 $
 
 
