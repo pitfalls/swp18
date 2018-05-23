@@ -235,5 +235,30 @@ count(a::append(as, bs), e) == count(a::as, e) + count(bs, e)\\
 count(a::as, e) + count(bs, e) == count(a::as, e) + count(bs, e)\\ 
 count(a, e) + count(as, e) + count(bs, e) == count(a, e) + count(as, e) + count(bs,e) $\rightarrow$ q.e.d.
 
+
+\section*{Beispiel 5}
+
+\subsection*{Hypothese}
+\begin{align*}
+sumList(as) &= sumList(reverse(as)) & \hspace*{6em}
+\end{align*}
+
+\subsection*{Basis}
+\begin{align*}
+sumList(Nil) &= sumList(reverse(Nil) \\
+sumList(Nil) &= sumList(Nil) & \text{[def. reverse]}
+\end{align*}
+
+\subsection*{Induktionsschritt}
+\begin{align*}
+sumList(a::as) &= sumList(reverse(a::as))\\
+sumList(a) + sumList(as) &=  sumList(reverse(a::as)) & \text{[def. sumList]}\\
+sumList(a) + sumList(as) &= sumList(reverse(as)::reverse(a)) & \text{[def. reverse]}\\
+sumList(a) + sumList(as) &= sumList(reverse(as)) + sumList(reverse(a)) & \text{[def. sumList]}\\
+sumList(a) + sumList(as) &= sumList(reverse(as)) + sumList(a) & \text{[def. reverse]}\\
+sumList(a) + sumList(as) &= sumList(as) + sumList(a) & \text{[Hypothese]}\\
+sumList(a::as) &= sumList(a::as) & \text{[def sumList]}\\
+&q.e.d
+\end{align*}
 \end{document}
 
