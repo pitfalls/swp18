@@ -117,8 +117,9 @@
 \bigskip
 \section*{Beispiel 1}
 \begin{lstlisting}[language=scala]
-def div(a: Int, b:Int): Int = a / b
-def mod(a: Int, b:Int): Int = a % b
+div(a: Int, b:Int): Int = if eq? (b,0) then nil 
+    else div(divide(a,b), build(mod(a,b))
+mod(a: Int, b:Int): Int = if eq?(minus(a,(mul(div(a,b),b))))
 \end{lstlisting}
 \subsection*{Lösung}
 \\
