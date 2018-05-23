@@ -117,9 +117,54 @@
 \bigskip
 \section*{Beispiel 1}
 \begin{lstlisting}[language=scala]
-def div(a: Int, b:Int): Int = a / b
-def mod(a: Int, b:Int): Int = a % b
+div(a: Int, b:Int): Int = if eq? (b,0) then nil 
+    else div(divide(a,b), build(mod(a,b))
+mod(a: Int, b:Int): Int = if eq?(minus(a,(mul(div(a,b),b))))
 \end{lstlisting}
+\subsection*{Lösung}
+\\
+Hypothese:\\
+$\forall \omega \in ENV: I(\delta, \omega, \underline{div(a,b))} = \omega(\underline{a})/\omega(\underline{b}) $
+\\
+\\
+Induktions Basis:\\
+$\omega(\underline{a}) = 0$\\
+$\omega(\underline{b}) = 0$\\
+$I(\delta, \omega, \underline{div(a,b)}) = I(\delta,\omega, if eq?(b,0) then$ nil else $ div(divide(a,b), build(mod(a,b))$\\
+\\
+NR: \\
+$I(\delta, \omega, \underline{eq?(b,0)}) = eq?(I(\delta, \omega, \underline{b}), I(\delta, \omega, 0) \\
+= eq?(\omega(\underline{b}),0)  \\
+= eq?(0,0) \\
+=T \\ $
+\\
+Induktions Schritt:\\
+$\omega(a) = n+1 $ \\
+$\omega(b) = n+1 $ \\
+$I(\delta, \omega, \underline{div(a,b)}) = I(\delta,\omega, if     eq?(b,0) then$ nil else $div(divide(a,b), build(mod(a,b))\\$
+\\
+NR:\\
+$I(\delta, \omega, \underline{eq?(b,0)}) = eq?(I(\delta, \omega, \underline{b}), I(\delta, \omega, 0) \\
+= eq?(\omega(\underline{b}),0)  \\
+= eq?(n+1,0) \\
+=F \\
+\\
+= I(\delta, \omega', \underline{div(divide(a,b),build(mod(a,b))}))$\\
+\\
+NE:\\
+$(\omega''(a),\omega''(b)) = I(\delta, \omega', divide(a,b)) = divide(I(\delta, \omega', a), I(\delta, \omega', b)) \\
+= div(\omega'(a), \omega'(b))\\
+= div(n+1, n+1)\\
+= \frac{n+1}{n+1} = 1 \\
+\\
+=I(\delta, \omega'', build(mod(a,b))$\\
+\\
+NE:\\
+$(\omega'''(\underline{a}),\omega'''(\underline{b})) = I(\delta, \omega'', build(mod(a,b)) \\
+= build(I(\delta, \omega'', mod(a)), I(\delta, \omega'', mod(b)))\\
+= build(\omega''(a), \omega''(b))\\
+= build (n+1, n+1)\\
+= 0$\\
 
 \section*{Beispiel 3}
 \subsection*{a}
