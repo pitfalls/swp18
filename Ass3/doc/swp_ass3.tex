@@ -1,0 +1,199 @@
+
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the  LaTeX source for the instructions to authors using
+% the LaTeX document class 'llncs.cls' for contributions to
+% the Lecture Notes in Computer Sciences series.
+% http://www.springer.com/lncs       Springer Heidelberg 2006/05/04
+%
+% It may be used as a template for your own input - copy it
+% to a new file with a new name and use it as the basis
+% for your article.
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,runningheads,a4paper]{llncs}
+
+
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage[mathcal]{eucal}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{mathtools}
+
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{soul}
+
+
+
+
+
+\usepackage{listings}
+\lstdefinelanguage{scala}{
+  morekeywords={abstract,case,catch,class,def,%
+    do,else,extends,false,final,finally,%
+    for,if,implicit,import,match,mixin,%
+    new,null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,%
+    type,val,var,while,with,yield},
+  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+\lstset{
+    literate={~} {$\sim$}{1}
+}
+
+
+
+\makeatletter
+\renewcommand\chapter{\thispagestyle{plain}%
+\global\@topnum\z@
+\@afterindentfalse
+\secdef\@chapter\@schapter}
+\makeatother
+\urldef{\mailsa}\path|alexander.frewein@student.tugraz.at|
+\urldef{\mailsf}\path|fabian.fruehwirth@student.tugraz.at|
+\urldef{\mailsp}\path|stephany.amizic@student.tugraz.at|
+\topmargin-0.5cm
+
+
+\begin{document}
+
+
+% first the title is needed
+\title{SWP Assignment 3}
+
+% a short form should be given in case it is too long for the running head
+\titlerunning{SWP Assignment 3}
+
+% the name(s) of the author(s) follow(s) next
+%
+% NB: Chinese authors should write their first names(s) in front of
+% their surnames. This ensures that the names appear correctly in
+% the running heads and the author index.
+%
+\author{Alexander Frewein (01430019)\\
+		Klaus Fabian Frühwirt (01131523)\\
+		Stephany Amizic (01331786)}
+
+%
+\authorrunning{SWP Assigmnment 3}
+% (feature abused for this document to repeat the title also on left hand pages)
+% the affiliations are given next; don't give your e-mail address
+% unless you accept that it will be published
+\institute{Institute of Software Technology\\
+\mailsa \\
+\mailsf \\
+\mailsp \\
+}
+
+
+
+
+\toctitle{SWP Assignment 3}
+\tocauthor{Authors' Instructions}
+\maketitle
+\section*{Beispiel 4}
+\subsection*{a)}
+%&\rightarrow \forall \omega ', \omega' ~ x \ \omega ': 
+\begin{flalign*}
+& \exists x \ \forall y \ eq?(add(x,y),0) &\\
+&Ip(\omega, \underline{(\exists x) \ (\forall y) \ eq?(add(x,y),0)})&\\
+&\Leftrightarrow \exists \forall \omega' , \omega \ \sim \underline{x, y} \ \omega' : Ip(\omega', eq?(add(x,y),0)&\\
+&\Leftrightarrow \exists \forall \omega' , \omega \ \sim \underline{x, y} \ \omega' : Ip(\omega', eq?(Ip(\omega', add(x, y), 0)) &\\
+&\Leftrightarrow \exists \forall \omega' , \omega \ \sim \underline{x, y} \ \omega' : Ip(\omega', eq?(Ip(\omega', add(Ip(\omega', x), Ip(\omega', y), Ip(\omega', 0)) &\\
+&\Leftrightarrow \exists \forall \omega' , \omega \ \sim \underline{x, y} \ \omega' : Ip(\omega', eq?(Ip(\omega', add(\omega(\underline{x}), \omega' (\underline{y})), \omega' (\underline{0}))) &\\
+\end{flalign*}
+Wir vermuten, dass der semantische Status gültig ist. Um dies zu beweisen müssen wir
+eine Fallunterscheidung nach $\omega(y) \ und \ \omega(x)$ machen.\\
+Fall 1:
+\begin{flalign*}
+&\omega(\underline{x}) = 0 \ \ \ \ \ \ \ \ \ \omega(\underline{y}) = 0&\\
+&eq?(add(\omega(\underline{x}), \omega(\underline{y})), 0) &\\
+&eq?(0,0) \rightarrow TRUE
+\end{flalign*}
+Fall 2:
+\begin{flalign*}
+&\omega(\underline{x}) = 1 \ \ \ \ \ \ \ \ \ \omega(\underline{y}) = 1&\\
+&eq?(add(\omega(\underline{x}), \omega(\underline{y})), 0) &\\
+&eq?(2,0) \rightarrow FALSE
+\end{flalign*}
+Der Ausdruck ist \textbf{erfüllbar}.
+\newpage
+\subsection*{b)}
+\begin{flalign*}
+& \exists a \ \lnot empty?(l) \rightarrow eq?(first(l), a) &\\
+&Ip(\omega, (\exists a) \ \underline{\lnot empty?(l) \rightarrow eq?(first(l), a)})&\\
+&\Leftrightarrow \exists \omega', \omega \ \sim \ \underline{a} \ \omega' : Ip(\omega', \lnot empty?(l) \rightarrow eq?(first(l), a))&\\
+&\Leftrightarrow \exists \omega', \omega \ \sim \ \underline{a} \ \omega' : Ip(\omega', \lnot Ip(\omega', empty?(l)) \rightarrow eq?(Ip(\omega', first(l)), a))&\\
+&\Leftrightarrow \exists \omega', \omega \ \sim \ \underline{a} \ \omega' : Ip(\omega', \lnot Ip(\omega', empty?(Ip(\omega', l)) \rightarrow eq?(Ip(\omega', first(Ip(\omega', l)), Ip(\omega', a)))&\\
+&\Leftrightarrow \exists \omega', \omega \ \sim \ \underline{a} \ \omega' : Ip(\omega', \lnot Ip(\omega', empty?(\omega'(\underline{l})) \rightarrow eq?(Ip(\omega', first(\omega'(\underline{l})),\omega'(\underline{a})))&\\
+\end{flalign*}
+Wir vermuten, dass der semantische Status gültig ist. Um dies zu beweisen müssen wir
+eine Fallunterscheidung nach $\omega(a) \ und \ \omega(l)$ machen.\\
+Fall1:
+\begin{flalign*}
+&\omega(\underline{a}) == first(\omega(\underline{l}))&\\
+&\lnot empty?(\omega(\underline{l})) = TRUE&\\
+&eq?(first(\omega(\underline{l})), \omega(\underline{a})) = TRUE&\\
+& TRUE \rightarrow TRUE = TRUE &\\
+\end{flalign*}
+Fall 2:
+\begin{flalign*}
+&\omega(\underline{a}) != first(\omega(\underline{l}))&\\
+&\lnot empty?(\omega(\underline{l})) = TRUE&\\
+&eq?(first(\omega(\underline{l})), \omega(\underline{a})) = FALSE&\\
+& TRUE \rightarrow FALSE = FALSE &\\
+\end{flalign*}
+Der Ausdruck ist \textbf{erfüllbar}.
+\subsection*{c)}
+\begin{flalign*}
+&\forall x \ eq?(mult(x, 2), y) \  \lor \ gt?(mult(x, x), y)&\\
+&Ip(\omega, \underline{(\forall x) eq?(mult(x, 2), y) \  \lor \ gt?(mult(x, x), y)}) &\\
+&\forall\omega', \omega \ \sim \ \underline{x} \ \omega' : Ip(\omega', eq?(mult(x, 2), y) \ \lor \ gt?(mult(x, x), y))&\\
+&\forall\omega', \omega \ \sim \ \underline{x} \ \omega' : Ip(\omega', Ip(\omega' , eq?(mult(x, 2), y)) \ \lor \ Ip(\omega', gt?(mult(x, x), y)))&\\
+&\forall\omega', \omega \ \sim \ \underline{x} \ \omega' : Ip(\omega', Ip(\omega' , eq?(Ip(\omega', mult(x, 2), y))) \ \lor \ Ip(\omega', gt?(Ip(\omega', mult(x, x), y))))&\\
+&\forall\omega', \omega \ \sim \ \underline{x} \ \omega' : Ip(\omega', Ip(\omega' , eq?(Ip(\omega', mult(Ip(\omega' , x), Ip(\omega', 2)), Ip(\omega', y)))) \ \lor &\\
+&\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  Ip(\omega', gt?(Ip(\omega', mult(Ip(\omega', x), Ip(\omega', x)), Ip(\omega', y)))))&\\
+&\forall\omega', \omega \ \sim \ \underline{x} \ \omega' : Ip(\omega', Ip(\omega' , eq?(Ip(\omega', mult(\omega'(\underline{x}), \omega'(\underline{2})), \omega'(\underline{y})))) \ \lor &\\
+&\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  Ip(\omega', gt?(Ip(\omega', mult(\omega'(\underline{x}), \omega'(\underline{x})), \omega'(\underline{y})))))&\\
+\end{flalign*}
+Wir vermuten, dass der semantische Status gültig ist. Um dies zu beweisen müssen wir
+eine Fallunterscheidung nach $\omega(x)$ machen.\\
+Fall 1:
+\begin{flalign*}
+&\omega(\underline{x}) = 0&\\
+&eq?(mult(\omega(\underline{x}), 2), \omega(\underline{y}))&\\
+&eq?(mult(0, 2), \omega(\underline{y}))&\\
+&eq?(0, \omega(\underline{y}))&\\
+&TRUE \ falls \ \omega(\underline{y}) = 0&\\
+&FALSE \ falls \ \omega(\underline{y}) != 0&\\
+&T \ \lor \ gt?(mult(\omega(\underline{x}), \omega(\underline{x})), \omega(\underline{y}))&\\
+&T \ \lor \ gt?(mult(0, 0)), \omega(\underline{y}))&\\
+&gt?(0, \omega(\underline{y}))  = FALSE&\\
+&T \ \lor \ F \rightarrow TRUE&\\
+&&\\
+&F \ \lor \ gt?(mult(\omega(\underline{x}), \omega(\underline{x})), \omega(\underline{y}))&\\
+&F \ \lor \ gt?(mult(0, 0)), \omega(\underline{y}))&\\
+&gt?(0, \omega(\underline{y}))  = FALSE&\\
+&F \ \lor \ F \rightarrow FALSE&\\
+\end{flalign*}
+Der Ausdruck ist \textbf{erfüllbar}.
+\end{document}
+
