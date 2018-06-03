@@ -109,6 +109,88 @@
 \toctitle{SWP Assignment 3}
 \tocauthor{Authors' Instructions}
 \maketitle
+\section*{Beispiel 1}
+Codierung für Elemente aus A:\\
+$\pi((n,d)) = build(n, build(d,[])) = [n,d]$ \\
+\\
+Codierung der Funktionen: \\
+$\pi[mult](x, y) = build(first(rest(x)) \cdot first(rest(y)), build(f irst(x) \cdot first(y), []))$\\
+$\pi[inverse](x) = build(first(rest(x)), build(first(x), [])). . . wenn first(x)\neq 0$\\
+\\
+Codierung des Prädikats:\\
+$\pi[eq](x, y) = eq?(x, y)$\\
+\\
+\subsection*{Lösung}
+Seien $n,d$ Elemente aus $Z$ und Nenner $\neq 0$, zB. $n=1, d=2$  \\
+\\
+Codierung für Elemente aus A:\\
+$\pi((n,d)) = build(n, build(d,[])) = [n,d]$ \\
+$\pi((n,d)) = [n,d]$\\
+\\
+Beispiel:\\
+Linke Seite:\\
+$\pi((1,2)) = build(1, build(2, [])) = build(1,[2]) = [1,2]$\\
+\\
+Rechte Seite:\\
+$[n,d] = [1,2]$\\
+\bold{KORREKT}\\
+\\
+Codierung der Funktionen:\\
+$\pi[mult](x, y) = build(first(rest(x)) \cdot first(rest(y)), build(first(x) \cdot first(y), []))$\\
+$= build(first(rest(x))\cdot first(rest(y)), [first(x)\cdot first(y)]$\\
+$= [first(rest(x))\cdot first(rest(y)), first(x)\cdot first(y)]$\\
+$x = (a,b)$\\
+$first (x) = a$\\
+$first(rest(x)) = b$\\
+\\
+$y = (c,d)$\\
+$first(y) = c$\\
+$first(rest(y)) = d$\\
+\\
+$[a\cdot b, c\cdot d] = \pi(mult(x,y))= \pi (b\cdot d, a\cdot c)$\\
+\\
+Beispiel:\\
+Seien $a, b, c, d$ Elemente aus $Z$ und Nenner $\neq 0$, zB. $a=1, b=2, c= 3, d=4$ und $x = (1,2), y = (3,4)$ \\
+Linke Seite:\\
+$\pi[mult]((1,2), (3,4)) = (2 \cdot 4, 1 \cdot 3) = (8, 3)$\\
+Rechte Seite:\\
+$build(2\cdot 4, build(1\cdot 3, []))= build(2\cdot 4, [1 \cdot 3])$\\
+$= [2\cdot 4, 1 \cdot 3] = [8,3] $\\
+\bold{KORREKT}\\
+\\
+$\pi[inverse](x) = build(first(rest(x)), build(first(x), []))$\\
+$= build(first(rest(x)),[first(x)])$\\
+$= [first(rest(x)), first(x)]$\\
+\\
+$inverse(x) = (d,n)$\\
+$x = (d,n)$\\
+$first(rest(x)) = d$\\
+$first(x) = n$\\
+$\pi [inverse](x) = [d,n]$\\
+$\pi [inverse](x)= \pi [(d,n)] = [d,n]$\\
+\\
+Beispiel:\\
+Linke Seite:\\
+$\pi [inverse](1,2) = (2,1)$\\
+Rechte Seite: \\
+$build(2, build(1, [])) = build(2, [1]) = [2,1]$\\
+\bold{KORREKT}\\
+\\
+Codierung des Prädikats:\\
+$\pi[eq](x, y) = eq?(x, y)$\\
+\\
+Beispiel 1:\\
+Linke Seite:\\
+$\pi[eq]((1,2),(3,4)) \rightarrow \frac{1}{2} \neq \frac{3}{4} \rightarrow F$\\
+Rechte Seite:\\
+$eq?((1,2), (3,4)) = F$\\
+Beispiel 2: \\
+$a = 1, b = 1, c = 2, d = 2$\\
+Linke Seite:\\
+$\pi[eq]((1,1),(2,2)) \rightarrow \frac{1}{1} = \frac{2}{2} \rightarrow \frac{1}{1} = \frac{1}{1} \rightarrow F$\\
+Rechte Seite:\\
+$eq?((1,1), (2,2)) = T$\\
+\bold{NICHT KORREKT}\\
 \section*{Beispiel 4}
 \subsection*{a)}
 %&\rightarrow \forall \omega ', \omega' ~ x \ \omega ': 
