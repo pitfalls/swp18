@@ -133,7 +133,7 @@ $\pi((1,2)) = build(1, build(2, [])) = build(1,[2]) = [1,2]$\\
 \\
 Rechte Seite:\\
 $[n,d] = [1,2]$\\
-\bold{KORREKT}\\
+\textbf{KORREKT}\\
 \\
 Codierung der Funktionen:\\
 $\pi[mult](x, y) = build(first(rest(x)) \cdot first(rest(y)), build(first(x) \cdot first(y), []))$\\
@@ -156,7 +156,7 @@ $\pi[mult]((1,2), (3,4)) = (2 \cdot 4, 1 \cdot 3) = (8, 3)$\\
 Rechte Seite:\\
 $build(2\cdot 4, build(1\cdot 3, []))= build(2\cdot 4, [1 \cdot 3])$\\
 $= [2\cdot 4, 1 \cdot 3] = [8,3] $\\
-\bold{KORREKT}\\
+\textbf{KORREKT}\\
 \\
 $\pi[inverse](x) = build(first(rest(x)), build(first(x), []))$\\
 $= build(first(rest(x)),[first(x)])$\\
@@ -174,7 +174,7 @@ Linke Seite:\\
 $\pi [inverse](1,2) = (2,1)$\\
 Rechte Seite: \\
 $build(2, build(1, [])) = build(2, [1]) = [2,1]$\\
-\bold{KORREKT}\\
+\textbf{KORREKT}\\
 \\
 Codierung des Prädikats:\\
 $\pi[eq](x, y) = eq?(x, y)$\\
@@ -190,8 +190,42 @@ Linke Seite:\\
 $\pi[eq]((1,1),(2,2)) \rightarrow \frac{1}{1} = \frac{2}{2} \rightarrow \frac{1}{1} = \frac{1}{1} \rightarrow F$\\
 Rechte Seite:\\
 $eq?((1,1), (2,2)) = T$\\
-\bold{NICHT KORREKT}\\
+\textbf{KORREKT}\\
 \section*{Beispiel 4}
+\section*{Beispiel 2}
+\subsection*{Codierung Prädikate:}
+$\pi[isEmpty?] \ (x) = \\
+if(emptyS(s)) \ then \ TRUE\\
+else\\
+FALSE\\
+$
+$
+\\ \pi[isElement?] \ (x,y) = \\
+if(eq?(first(x), y)) \ then \ TRUE\\
+else\\
+FALSE\\
+$
+\subsection*{Codierung Funktionen:}
+$
+\pi[insert] \ (x,y) = \\
+if(isEmpty?(x)) \ then \\
+build(y, []) \\
+if(isElement?(x,y)) \ then \\
+build(rest(x), []) \\
+else \\
+build(first(x), insert(rest(x), y)))\\
+$
+$
+\\ \pi[remove] \ (x,y) = \\
+if(isEmpty?(x)) \ then \\
+build([],[]) \\
+if(isElement?(x,y)) \ then \\
+build(rest(x), []) \\
+if(isEmpty?(rest(x))) \ then \\
+build([], []) \\
+else\\
+build(first(x), remove(rest(x), y))
+$
 \subsection*{a)}
 %&\rightarrow \forall \omega ', \omega' ~ x \ \omega ': 
 \begin{flalign*}
