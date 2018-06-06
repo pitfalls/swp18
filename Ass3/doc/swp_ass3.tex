@@ -265,14 +265,15 @@ Wir vermuten, dass der semantische Status gültig ist. Um dies zu beweisen müss
 eine Fallunterscheidung nach $\omega(a) \ und \ \omega(l)$ machen.\\
 Fall1:
 \begin{flalign*}
-&\omega(\underline{a}) == first(\omega(\underline{l}))&\\
-&\lnot empty?(\omega(\underline{l})) = TRUE&\\
-&eq?(first(\omega(\underline{l})), \omega(\underline{a})) = TRUE&\\
-& TRUE \rightarrow TRUE = TRUE &\\
+&\omega (\underline{l}) == nil&\\
+&\lnot empty?(\omega(\underline{l})) = FALSE&\\
+&FALSE -> FALSE = TRUE&\\
+&FALSE -> TRUE = TRUE&\\
+&TRUE&\\
 \end{flalign*}
 Fall 2:
 \begin{flalign*}
-&\omega(\underline{a}) != first(\omega(\underline{l}))&\\
+&\omega (\underline{l}) \  != \ nil&\\
 &\lnot empty?(\omega(\underline{l})) = TRUE&\\
 &eq?(first(\omega(\underline{l})), \omega(\underline{a})) = FALSE&\\
 & TRUE \rightarrow FALSE = FALSE &\\
