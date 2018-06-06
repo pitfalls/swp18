@@ -190,8 +190,8 @@ Linke Seite:\\
 $\pi[eq]((1,1),(2,2)) \rightarrow \frac{1}{1} = \frac{2}{2} \rightarrow \frac{1}{1} = \frac{1}{1} \rightarrow F$\\
 Rechte Seite:\\
 $eq?((1,1), (2,2)) = T$\\
-\textbf{KORREKT}\\
-\section*{Beispiel 4}
+\textbf{NICH KORREKT}\\
+
 \section*{Beispiel 2}
 \subsection*{Codierung Prädikate:}
 $\pi[isEmpty?] \ (x) = \\
@@ -226,6 +226,79 @@ build([], []) \\
 else\\
 build(first(x), remove(rest(x), y))
 $
+
+\section*{Beispiel 3}
+\subsection*{a)}
+\begin{align}
+&\indent\omega(a) = 42\\
+&\indent I_\mathcal{A}(\omega, Z_{2-8}; a := a+a)\\
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega, x := add(1,2); Z_{4-7})\ a := a + a)\\
+&\indent I_\mathcal{A}( I_\mathcal{A}(I_\mathcal{A}(\omega, x := add(1,2))\ Z_{4-7})\ a := a + a)
+\end{align}
+\begin{gather*}
+NE: \omega^1 \sim_x \omega,\: \omega^1(x) = I_\mathcal{T}(\omega, add(1,2)) = add(1,2) = 3
+\end{gather*}
+\begin{align}
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, Z_{4-7})\ a := a+a)\\
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, if\ eq?(x,3)\ then\ a := a + a\ else\ x := add(x,2))\ a := a+a)
+\end{align}
+\begin{gather*}
+NR: I_\mathcal{P}(\omega^1, eq?(x,3)) = eq?(I_\mathcal{P}(\omega^1,x),3) = eq?(3,3) = \top
+\end{gather*}
+\begin{align}
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, a := a + a)\ a := a+a)
+\end{align}
+\begin{gather*}
+NE: \omega^2 \sim_a \omega^1,\: \omega^2(a) = I_\mathcal{T}(\omega^2,a ) = (\omega^1,a )+(\omega^1,a )  = 6
+\end{gather*}
+\begin{align}
+&\indent I_\mathcal{A}(\omega^2, a := a+a)
+\end{align}
+\begin{gather*}
+NE: \omega^3 \sim_a \omega^2,\: \omega^3(a) = I_\mathcal{T}(\omega^3,a ) = (\omega^2,a )+(\omega^2,a )  = 12
+\end{gather*}
+\begin{align}
+\underline{\omega^3}
+\end{align}
+
+
+\subsection*{b)}
+Man vereinfache Programm 1, analog zu a.), weitestmöglich. Zu beachten ist außerdem, dass $\omega$ in diesem Fall 
+über keine anfänglichen Belegungen verfügt.
+\begin{align}
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega, Z_{2-8});\ \alpha) \\
+&\indent I_\mathcal{A}(I_\mathcal{A}(I_\mathcal{A}(\omega, x := add(1,2)); Z_{4-7});\ \alpha)
+\end{align}
+\begin{gather*}
+NE: \omega^1 \sim_x \omega,\: \omega^1(x) = I_\mathcal{T}(\omega, add(1,2)) = add(1,2) = 3
+\end{gather*}
+\begin{align}
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, Z_{4-7});\ \alpha)\\
+&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, if\ eq?(x,3)\ then\ \alpha\ else\ x := add(x,2)) );\ \alpha)
+\end{align}
+\begin{gather*}
+NR: I_\mathcal{P}(\omega^1, eq?(x,3)) = eq?(I_\mathcal{P}(\omega^1,x),3) = eq?(3,3) = \top
+\end{gather*}
+\begin{align}
+&\indent \underline{I_\mathcal{A}(I_\mathcal{A}(\omega^1, \alpha) \alpha)}
+\end{align}
+Man vereinfache nun Programm 2:
+\begin{align}
+&\indent I_\mathcal{A}(\bar{\omega}, x := 3; Z_{3-6})\\
+&\indent I_\mathcal{A}(I_\mathcal{A}(\bar{\omega}, x := 3) \alpha; \alpha)\\
+\end{align}
+\begin{gather*}
+NE: \bar{\omega}^1 \sim_x \omega,\: \bar{\omega}^1(x) = I_\mathcal{T}(\omega, 3) = 3
+\end{gather*}
+\begin{align}
+&\indent \underline{I_\mathcal{A}(I_\mathcal{A}(\bar{\omega}^1, \alpha) \alpha)}
+\end{align}
+Damit wurde gezeigt, dass sich die Interpretationsfunktionen beider Programme ohne Einschränkung der Allgemeinheit 
+auf dieselbe Funktion vereinfachen lassen. Desweiteren ist trivial zu erkennen, dass $\omega^1$ und $\bar{\omega}^1$ ident sind, 
+womit die Gleichheit bewiesen ist.
+
+
+\section*{Beispiel 4}
 \subsection*{a)}
 %&\rightarrow \forall \omega ', \omega' ~ x \ \omega ': 
 \begin{flalign*}
@@ -313,75 +386,8 @@ Fall 1:
 \end{flalign*}
 Der Ausdruck ist \textbf{erfüllbar}.
 
-\section*{Beispiel 3}
-\begin{align}
-&\indent\omega(a) = 42\\
-&\indent I_\mathcal{A}(\omega, Z_{2-8}; a := a+a)\\
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega, x := add(1,2); Z_{4-7})\ a := a + a)\\
-&\indent I_\mathcal{A}( I_\mathcal{A}(I_\mathcal{A}(\omega, x := add(1,2))\ Z_{4-7})\ a := a + a)
-\end{align}
-\begin{gather*}
-NE: \omega^1 \sim_x \omega,\: \omega^1(x) = I_\mathcal{T}(\omega, add(1,2)) = add(1,2) = 3
-\end{gather*}
-\begin{align}
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, Z_{4-7})\ a := a+a)\\
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, if\ eq?(x,3)\ then\ a := a + a\ else\ x := add(x,2))\ a := a+a)
-\end{align}
-\begin{gather*}
-NR: I_\mathcal{P}(\omega^1, eq?(x,3)) = eq?(I_\mathcal{P}(\omega^1,x),3) = eq?(3,3) = \top
-\end{gather*}
-\begin{align}
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, a := a + a)\ a := a+a)
-\end{align}
-\begin{gather*}
-NE: \omega^2 \sim_a \omega^1,\: \omega^2(a) = I_\mathcal{T}(\omega^2,a ) = (\omega^1,a )+(\omega^1,a )  = 6
-\end{gather*}
-\begin{align}
-&\indent I_\mathcal{A}(\omega^2, a := a+a)
-\end{align}
-\begin{gather*}
-NE: \omega^3 \sim_a \omega^2,\: \omega^3(a) = I_\mathcal{T}(\omega^3,a ) = (\omega^2,a )+(\omega^2,a )  = 12
-\end{gather*}
-\begin{align}
-\underline{\omega^3}
-\end{align}
-
-
-\subsection*{b)}
-Man vereinfache Programm 1, analog zu a.), weitestmöglich. Zu beachten ist außerdem, dass $\omega$ in diesem Fall 
-über keine anfänglichen Belegungen verfügt.
-\begin{align}
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega, Z_{2-8});\ \alpha) \\
-&\indent I_\mathcal{A}(I_\mathcal{A}(I_\mathcal{A}(\omega, x := add(1,2)); Z_{4-7});\ \alpha)
-\end{align}
-\begin{gather*}
-NE: \omega^1 \sim_x \omega,\: \omega^1(x) = I_\mathcal{T}(\omega, add(1,2)) = add(1,2) = 3
-\end{gather*}
-\begin{align}
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, Z_{4-7});\ \alpha)\\
-&\indent I_\mathcal{A}(I_\mathcal{A}(\omega^1, if\ eq?(x,3)\ then\ \alpha\ else\ x := add(x,2)) );\ \alpha)
-\end{align}
-\begin{gather*}
-NR: I_\mathcal{P}(\omega^1, eq?(x,3)) = eq?(I_\mathcal{P}(\omega^1,x),3) = eq?(3,3) = \top
-\end{gather*}
-\begin{align}
-&\indent \underline{I_\mathcal{A}(I_\mathcal{A}(\omega^1, \alpha) \alpha)}
-\end{align}
-Man vereinfache nun Programm 2:
-\begin{align}
-&\indent I_\mathcal{A}(\bar{\omega}, x := 3; Z_{3-6})\\
-&\indent I_\mathcal{A}(I_\mathcal{A}(\bar{\omega}, x := 3) \alpha; \alpha)\\
-\end{align}
-\begin{gather*}
-NE: \bar{\omega}^1 \sim_x \omega,\: \bar{\omega}^1(x) = I_\mathcal{T}(\omega, 3) = 3
-\end{gather*}
-\begin{align}
-&\indent \underline{I_\mathcal{A}(I_\mathcal{A}(\bar{\omega}^1, \alpha) \alpha)}
-\end{align}
-Damit wurde gezeigt, dass sich die Interpretationsfunktionen beider Programme ohne Einschränkung der Allgemeinheit 
-auf dieselbe Funktion vereinfachen lassen. Desweiteren ist trivial zu erkennen, dass $\omega^1$ und $\bar{\omega}^1$ ident sind, 
-womit die Gleichheit bewiesen ist.
-
 \end{document}
+
+
 
 
