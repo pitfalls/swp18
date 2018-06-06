@@ -3,23 +3,30 @@ import scala.util.parsing.combinator._
 class ExpParser extends JavaTokenParsers {
 
   // TODO Implement the expression parser and add additional parsers for terminal and non terminal symbols, where necessary.
-  def program: Parser[Program] = ???
+  def program: Parser[Program] =
+  rep(function<~";") ~ exp ^^ {case fs~ex => Program(fs, ex)}
 
-  def exp: Parser[Expression_Node] = ???
+  def exp: Parser[Node] = block | recordDef | recordAccess | varDecl | varAss |
+                         cond | call | list | variable | int | Boolean_TRUE | Boolean_False | braces
+
+  private def function : Parser[FunctionDeclaration] =
+  "fun" ~ id ~ "(" ~ repsep(id, ",") ~ ")" ~ "=" ~ exp ^^ {case _~i~_~ids~_~_~ex => FunctionDeclaration(i, ids, ex)}
 
   private def braces: Parser[braces_Node] =
   "(" ~ exp ~ ")" ^^ {case _~x~_ => braces_Node(x)}
 
 
-  private def vardecl: Parser[VarDecl_Node] =
-    "$" ~ Id ~ "=" ~ exp ^^{case _~id~_~x => VarDecl_Node(id, x)}
+  private def block : Parser[block_Node] =
+  "{" ~ rep(exp<~";") ~ "}" ^^ {case _~xs~_ => block_Node(xs)}
 
-  private def varass: Parser[VarAss_Node] =
-    Id ~ "=" ~ exp ^^{case id~_~x => VarAss_Node(id, x)}
+  private def varDecl: Parser[VarDecl_Node] =
+    "$" ~ id ~ "=" ~ exp ^^{case _~id~_~x => VarDecl_Node(id, x)}
 
+  private def varAss: Parser[VarAss_Node] =
+    id ~ "=" ~ exp ^^{case id~_~x => VarAss_Node(id, x)}
 
-   /* private def call: Parser[Call_Node] =
-      Id ~ "(" ~> repsep(exp, ",") <~ ")" ^^ {case id~_~xs~_ => Call_Node(id, xs)}*/
+    private def call: Parser[Call_Node] =
+      id ~ "(" ~ repsep(exp, ",") ~ ")" ^^ {case i~_~xs~_ => Call_Node(i, xs)} //dont know if its correct
 
   private def cond: Parser[Cond_Node] =
   "if" ~ exp ~ "then" ~ exp ~ "else" ~ exp ^^ {case _~c1~_~c2~_~c3 => Cond_Node(c1, c2, c3)}
@@ -27,14 +34,20 @@ class ExpParser extends JavaTokenParsers {
   private def list: Parser[List_Node] =
     "[" ~> repsep(exp, ",") <~ "]" ^^ {case xs => List_Node(xs)}
 
-  private def Variable: Parser[Variable_Node] =
-    Id ^^ {case id => Variable_Node(id)}
+  private def variable: Parser[Variable_Node] =
+    id ^^ {case id => Variable_Node(id)}
 
+  private def recordvaluedecl : Parser[recordValueDecl_Node] =
+  "$" ~ id ~ "=" ~ exp ^^ {case _~id~_~ex => recordValueDecl_Node(id, ex)}
 
+  private def recordDef : Parser[recordDef_Node] =
+  "object" ~ "{" ~ rep(recordvaluedecl<~";") ~ "}" ^^ {case _~_~rs~_ => recordDef_Node(rs)}
 
+  def recordref : Parser[Node] = block | call | variable | recordDef | braces
 
-  private def Id : Parser[ID_Node] =
-    id ^^ {case identifier => ID_Node(identifier)}
+  def recordAccess : Parser[recordAccess_Node] =
+    recordref ~ "." ~ id ^^{case rf~_~i => recordAccess_Node(rf, i)}
+
 
   private def Boolean_False : Parser[Bool_True_Node] =
     boolean_true ^^ {case bool => Bool_True_Node(bool)}
@@ -54,11 +67,6 @@ class ExpParser extends JavaTokenParsers {
 
   private val boolean_true: Parser[String] =
     """TRUE"""
-
-
-
-
-
 
 
 }

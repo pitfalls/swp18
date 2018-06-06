@@ -48,6 +48,22 @@ class SWPInterpreterTests extends FunSuite {
     """)
   }
 
+
+  test("Parser normal program"){
+    expectValidGrammar("""
+                         fun getResult(list) = {
+                         $var = first(list);
+                         if eq?(var, 0) then {
+                         $var = build(1, list);
+                         list = if eq?([], rest(list)) then [1, 2, 3] else var;
+                         } else
+                         var = list = [];
+                         };
+                         getResult([0, 2, 4])
+                       """)
+  }
+
+
   test("Parser defect program") {
     expectInvalidGrammar("""
       fun odd(l) = if eq?(l, []) then False else even(rest(l);
