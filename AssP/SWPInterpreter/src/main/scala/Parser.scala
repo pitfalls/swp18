@@ -73,6 +73,9 @@ class ExpParser extends JavaTokenParsers {
 
 object ParseProgram extends ExpParser {
   def parse(s: String): ParseResult[Program] = {
-    parseAll(program, s)
+    val s2 = s.replaceAll("(?s)#\\*.*\\*#","") //block comments
+    val s3 = s2.replaceAll("(?m)#.*$","") //line comments
+
+    parseAll(program, s3)
   }
 }

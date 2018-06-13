@@ -136,7 +136,7 @@ class SWPInterpreterTests extends FunSuite {
     Queue("Echo"),
     "")
   }
-
+*/
   test("Parser comments") {
     expectValidGrammar("""
       add(#)
@@ -159,5 +159,4 @@ class SWPInterpreterTests extends FunSuite {
       )
     """)
   }
-*/
 }
