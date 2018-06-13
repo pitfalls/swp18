@@ -7,6 +7,7 @@ case class FunctionDeclaration(name: String, params: List[String], body: Node) e
 case class Integer_Node(value: Int) extends Node
 case class Bool_false_Node(value: String) extends Node
 case class Bool_True_Node(value: String) extends Node
+case class String_Node(s: String) extends Node
 
 
 case class Variable_Node(value: String) extends Node

@@ -111,7 +111,6 @@ class SWPInterpreterTests extends FunSuite {
     ExpInteger(6))
   }
 
-/*
   test("Interpreter string basic") {
     expectResult("""
       "1: Hello World!"
@@ -136,7 +135,7 @@ class SWPInterpreterTests extends FunSuite {
     Queue("Echo"),
     "")
   }
-*/
+
   test("Parser comments") {
     expectValidGrammar("""
       add(#)

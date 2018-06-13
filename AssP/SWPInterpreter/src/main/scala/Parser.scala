@@ -7,7 +7,7 @@ class ExpParser extends JavaTokenParsers {
   rep(function<~";") ~ exp ^^ {case fs~ex => Program(fs, ex)}
 
   def exp: Parser[Node] = block | recordDef | recordAccess | varDecl | varAss |
-                         cond | call | list | variable | int | Boolean_TRUE | Boolean_False | braces
+                         cond | call | list | variable | int | Boolean_TRUE | Boolean_False | braces | stringliteral
 
   private def function : Parser[FunctionDeclaration] =
   "fun" ~ id ~ "(" ~ repsep(id, ",") ~ ")" ~ "=" ~ exp ^^ {case _~i~_~ids~_~_~ex => FunctionDeclaration(i, ids, ex)}
@@ -48,12 +48,14 @@ class ExpParser extends JavaTokenParsers {
   def recordAccess : Parser[recordAccess_Node] =
     recordref ~ "." ~ id ^^{case rf~_~i => recordAccess_Node(rf, i)}
 
-
   private def Boolean_False : Parser[Bool_True_Node] =
     boolean_true ^^ {case bool => Bool_True_Node(bool)}
 
   private def Boolean_TRUE : Parser[Bool_false_Node] =
     boolean_false ^^ {case bool => Bool_false_Node(bool)}
+
+  def stringliteral: Parser[String_Node] =
+    str ^^{case s => String_Node(s.substring(1, s.length-1))}
 
   //Terminale
   private val id : Parser[String] =
@@ -68,6 +70,8 @@ class ExpParser extends JavaTokenParsers {
   private val boolean_true: Parser[String] =
     """TRUE"""
 
+  private val str: Parser[String] =
+    "\"([^\\|^|`]+?)\"".r
 
 }
 

@@ -32,13 +32,22 @@ class Interpreter(reader: () => String, writer: String => _) {
       //logic
         "and" -> {case List(a:ExpBoolean, b:ExpBoolean) => ExpBoolean(a.b && b.b)},
         "or" -> {case List(a:ExpBoolean, b:ExpBoolean) => ExpBoolean(a.b || b.b)},
-        "not" -> {case List(a:ExpBoolean) => ExpBoolean(!a.b)}
+        "not" -> {case List(a:ExpBoolean) => ExpBoolean(!a.b)},
+
+      //IO
+      "print" -> {case List(s: ExpString) => {
+        writer(s.str)
+        s
+      }},
+      "read" -> {case List() => ExpString(reader())}
     )
 
   var userFunctions = scala.collection.mutable.Map[String, Tuple2[List[String], Node]]()
 
   def interpret(program: Program): ExpValue = {
     // writer("Hello, " + reader() + "!")
+    println(program)
+    println("-----------------")
     program.functions.map{case FunctionDeclaration(name, params, body) => addFunctionDeclaration(name,params,body)}
     evalNode(program.main)
   }
@@ -123,6 +132,10 @@ class Interpreter(reader: () => String, writer: String => _) {
       case Bool_True_Node(value: String) => ExpBoolean(true)
       case braces_Node(node: Node) => {
         evalNode(node)
+      }
+      case String_Node(s: String) => {
+        println(s"string is: ${s}")
+        ExpString(s)
       }
 
       case _ => ??? //FunctionDeclaration, Program, function_Node
