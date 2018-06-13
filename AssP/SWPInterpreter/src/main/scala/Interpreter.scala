@@ -36,18 +36,19 @@ class Interpreter(reader: () => String, writer: String => _) {
 
       //IO
       "print" -> {case List(s: ExpString) => {
-        writer(s.str)
-        s
+          writer(s.str)
+          s
       }},
-      "read" -> {case List() => ExpString(reader())}
+      "read" -> {
+        case List() => ExpString(reader())
+        case List(_) => ??? //print per def. requires an empty arg list
+      }
     )
 
   var userFunctions = scala.collection.mutable.Map[String, Tuple2[List[String], Node]]()
 
   def interpret(program: Program): ExpValue = {
     // writer("Hello, " + reader() + "!")
-    println(program)
-    println("-----------------")
     program.functions.map{case FunctionDeclaration(name, params, body) => addFunctionDeclaration(name,params,body)}
     evalNode(program.main)
   }
@@ -134,7 +135,6 @@ class Interpreter(reader: () => String, writer: String => _) {
         evalNode(node)
       }
       case String_Node(s: String) => {
-        println(s"string is: ${s}")
         ExpString(s)
       }
 
