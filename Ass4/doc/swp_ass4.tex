@@ -111,7 +111,107 @@
 \toctitle{SWP Assignment 4}
 \tocauthor{Authors' Instructions}
 \maketitle
-
+\section*{Beispiel 1}
+1.
+$t = p(f(Y), f(Y,b), f(a))$ und $t' = p(X, f(a,b), X)$\\
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ $t = p(f(Y), f(Y,b), f(a))$ &  & $t' = p(X, f(a,b), X)$ \\ 
+ \hline
+  & $\theta = \{f(Y)|X\}$ &  \\ 
+ \hline
+ $t = p(f(Y), f(Y,b), f(a)$ &  & $t' = p(f(Y), f(a,b), f(Y)$ \\ 
+  \hline
+  & $\theta = \{f(Y)|X, Y|a\}$ &  \\
+  \hline
+ $t = p(f(Y), f(a,b), f(Y)$ &  & $t' = p(f(Y), f(a,b), f(Y)$ \\ 
+ \hline
+\end{tabular}
+\end{center}
+\\
+Unifizierbar $->$ $\theta = \{f(Y)|X, Y|a\}$ ist ein MGU\\
+\\
+2. $t = q(Y,g(Y), Y)$ und $t' = q(a, g(f(U), U)$\\
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+   $t = q(Y,g(Y), Y)$&  & $t' = q(a, g(f(U), U)$ \\ 
+  \hline
+  & $\theta = \{Y|a\}$ &  \\ 
+  \hline
+ $t = q(Y,g(Y), Y)$ & & $t' = q(Y, g(f(U)), U)$ \\ 
+ \hline
+   & $\theta = \{Y|a, Y|f(U)\}$ &  \\ 
+ \hline
+ $t = q(Y,g(Y), Y)$ & & $t' = q(Y, g(Y), U)$ \\ 
+   \hline
+\end{tabular}
+\end{center}
+\\
+Nicht unifizierbar \\
+\\
+3. $t = r(f(a,b), g(Z), h(Z))$ und $t' = r(f(a,Y), X, h(X))$\\
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+  $t = r(f(a,b), g(Z), h(Z))$ &  & $t' = r(f(a,Y), X, h(X))$ \\ 
+  \hline
+  & $\theta = \{b|Y\}$ &  \\ 
+ \hline
+  $t = r(f(a,Y), g(Z), h(Z))$ &  & $t' = r(f(a,Y), X, h(X))$ \\ 
+ \hline
+ & $\theta = \{b|Y, g(Z)|X\}$ &  \\
+  \hline
+  $t = r(f(a,Y), g(Z), h(Z))$ &  & $t' = r(f(a,Y), g(Z), h(g(Z)))$ \\ 
+  \hline
+   & $\theta = \{b|Y, g(Z)|X, Z|g(Z)\}$ &  \\
+ \hline
+\end{tabular}
+\end{center}
+\\
+Nicht unifizierbar $->$ Regel 2b\\
+\\
+4. $t = s(X, b , f(X))$ und $t' = s(f(Y), Y, f(a))$\\
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+  $t = s(X, b , f(X))$ &  & $t' = s(f(Y), Y, f(a))$ \\ 
+  \hline
+  & $\theta = \{X|f(Y)\}$ & \\ 
+  \hline
+ $t = s(f(Y), b, f(f(Y)))$ &  & $t' = s(f(Y), Y, f(a))$  \\ 
+  \hline
+  & $\theta = \{X|f(Y), X|b\}$ & \\
+  \hline
+  $t = s(f(Y), Y, f(f(b)))$ & & $t' = s(f(Y), Y, f(a))$\\
+ \hline
+\end{tabular}
+\end{center}
+\\
+nicht unifizierbar $->$ Regel 2a \\
+\\
+5. $t = U(Y(, f(a,b), g(Y)))$ und $t' = U(f(U), f(X,b), g(f(X)))$\\
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ $t = U(Y, f(a,b), g(Y)))$ &  & $t' = U(f(U), f(X,b), g(f(X)))$ \\ 
+ \hline
+  & $\theta = \{Y|f(U)\}$ &  \\ 
+  \hline
+  $t = U(f(U), f(a,b), g(f(U)))$ &  & $t' = U(f(U), f(X, b), g(f(X)))$ \\
+   \hline
+  & $\theta = \{Y|f(U), a|X\}$  &  \\ 
+  \hline
+  $t= U(f(U), f(X,b), g(f(U)))$& &$t' = U(f(U), f(X,b), g(f(X)))$\\
+   \hline
+  & $\theta = \{Y|f(U), a|X, U|X\}$  &  \\
+  \hline
+  $t = U(f(U), f(X,b), g(f(U)))$& & $t' = U(f(U), f(X,b), f(f(U)))$\\
+ \hline
+\end{tabular}
+\end{center}
+korrekt oder nicht??\\
 \section*{Beispiel 2}
 nat(0)\\
 nat(s(A)) : -nat(A)\\
