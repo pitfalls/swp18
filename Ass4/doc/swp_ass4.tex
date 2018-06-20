@@ -129,7 +129,6 @@ $t = p(f(Y), f(Y,b), f(a))$ und $t' = p(X, f(a,b), X)$\\
  \hline
 \end{tabular}
 \end{center}
-\\
 Unifizierbar $->$ $\theta = \{f(Y)|X, Y|a\}$ ist ein MGU\\
 \\
 2. $t = q(Y,g(Y), Y)$ und $t' = q(a, g(f(U), U)$\\
@@ -148,7 +147,6 @@ Unifizierbar $->$ $\theta = \{f(Y)|X, Y|a\}$ ist ein MGU\\
    \hline
 \end{tabular}
 \end{center}
-\\
 Nicht unifizierbar \\
 \\
 3. $t = r(f(a,b), g(Z), h(Z))$ und $t' = r(f(a,Y), X, h(X))$\\
@@ -169,7 +167,6 @@ Nicht unifizierbar \\
  \hline
 \end{tabular}
 \end{center}
-\\
 Nicht unifizierbar $->$ Regel 2b\\
 \\
 4. $t = s(X, b , f(X))$ und $t' = s(f(Y), Y, f(a))$\\
@@ -188,7 +185,6 @@ Nicht unifizierbar $->$ Regel 2b\\
  \hline
 \end{tabular}
 \end{center}
-\\
 nicht unifizierbar $->$ Regel 2a \\
 \\
 5. $t = U(Y(, f(a,b), g(Y)))$ und $t' = U(f(U), f(X,b), g(f(X)))$\\
@@ -197,21 +193,20 @@ nicht unifizierbar $->$ Regel 2a \\
  \hline
  $t = U(Y, f(a,b), g(Y)))$ &  & $t' = U(f(U), f(X,b), g(f(X)))$ \\ 
  \hline
-  & $\theta = \{Y|f(U)\}$ &  \\ 
+  & $\theta = \{Y|f(a)\}$ &  \\ 
   \hline
-  $t = U(f(U), f(a,b), g(f(U)))$ &  & $t' = U(f(U), f(X, b), g(f(X)))$ \\
+  $t = U(f(a), f(a,b), g(f(a)))$ &  & $t' = U(f(U), f(X, b), g(f(X)))$ \\
    \hline
-  & $\theta = \{Y|f(U), a|X\}$  &  \\ 
+  & $\theta = \{Y|f(a), U|a\}$  &  \\ 
   \hline
-  $t= U(f(U), f(X,b), g(f(U)))$& &$t' = U(f(U), f(X,b), g(f(X)))$\\
+  $t= U(f(a), f(X,b), g(f(a)))$& &$t' = U(f(a), f(X,b), g(f(X)))$\\
    \hline
-  & $\theta = \{Y|f(U), a|X, U|X\}$  &  \\
+  & $\theta = \{Y|f(a) , U|a, X|a\}$  &  \\
   \hline
-  $t = U(f(U), f(X,b), g(f(U)))$& & $t' = U(f(U), f(X,b), f(f(U)))$\\
- \hline
+  $t = U(f(a), f(a,b), g(f(a)))$& & $t' = U(f(a), f(a,b), g(f(a)))$\\ \hline
 \end{tabular}
 \end{center}
-korrekt oder nicht??\\
+Unifizierbar   $\theta = \{Y|f(a) , U|a, X|a\}$   ist ein MGU
 \section*{Beispiel 2}
 nat(0)\\
 nat(s(A)) : -nat(A)\\
