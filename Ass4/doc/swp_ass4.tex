@@ -74,7 +74,9 @@
 
 
 \begin{document}
-
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 % first the title is needed
 \title{SWP Assignment 4}
@@ -110,9 +112,32 @@
 \tocauthor{Authors' Instructions}
 \maketitle
 
+\section*{Beispiel 2}
+nat(0)\\
+nat(s(A)) : -nat(A)\\
+leq(0, s(Y)) : - nat(Y)\\
+leq(s(x), s(y)): - leq(X,Y)\\
 
-
-
+\begin{tabular}{|C{4cm}|L{6cm}|L{6cm}|}\hline
+   C1 & n(0) &\\ \hline
+   C2 &  $n(s(A))  \lor   \sim  n(A)$ & \\ \hline
+   C3 & $leq(0, s(Y))  \lor   \sim   nat(Y)$ & \\ \hline
+   C4 & $leq(s(X), s(Y))  \lor  \sim leq(X,Y)$ & \\ \hline
+   C5 & $\sim leq(s(s(0)), s(s(s(0))))$ & \\ \hline
+    &  & \\ \hline
+    & $\sim leq(s(s(0)), s(s(s(0))))$ & $leq(s(X), s(Y)) \lor \sim leq(X,Y)$\\
+    									& & A = s(0)\\ 
+    									& & B = s(s(0)) \\ \hline
+    & $\sim leq(s(0), s(s(0))) $	  & $leq(s(X), s(Y)) \lor \sim leq(X,Y)$\\
+    								    & & A = 0\\
+    								    & & B = s(0) \\ \hline
+    & $\sim leq(0, s(0))	$		  & $leq(0, s(Y)) \lor \sim nat(Y)$\\
+    								   & & B = 0 \\
+    								   & & n(0) \\ \hline
+    & $\sim nat(Y)$  & \\ \hline
+    & [ ] & \\ \hline								   									    
+    								     		
+   \end{tabular}
 \end{document}
 
 
